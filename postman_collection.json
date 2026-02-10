@@ -1,0 +1,169 @@
+{
+  "info": {
+    "name": "Energy Ingestion Engine API",
+    "description": "Collection for testing the Energy Ingestion Engine endpoints",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/health",
+              "host": ["{{baseUrl}}"],
+              "path": ["health"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Ingestion",
+      "item": [
+        {
+          "name": "Ingest Single Meter Reading",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"meterId\": \"METER_001\",\n  \"kwhConsumedAc\": 125.456,\n  \"voltage\": 240.5,\n  \"timestamp\": \"{{$isoTimestamp}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v1/ingest/meter",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "ingest", "meter"]
+            }
+          }
+        },
+        {
+          "name": "Ingest Single Vehicle Reading",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"vehicleId\": \"VEHICLE_001\",\n  \"soc\": 85.5,\n  \"kwhDeliveredDc\": 42.123,\n  \"batteryTemp\": 35.2,\n  \"timestamp\": \"{{$isoTimestamp}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v1/ingest/vehicle",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "ingest", "vehicle"]
+            }
+          }
+        },
+        {
+          "name": "Ingest Meter Batch",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"readings\": [\n    {\n      \"meterId\": \"METER_001\",\n      \"kwhConsumedAc\": 125.456,\n      \"voltage\": 240.5,\n      \"timestamp\": \"{{$isoTimestamp}}\"\n    },\n    {\n      \"meterId\": \"METER_002\",\n      \"kwhConsumedAc\": 130.789,\n      \"voltage\": 241.2,\n      \"timestamp\": \"{{$isoTimestamp}}\"\n    },\n    {\n      \"meterId\": \"METER_003\",\n      \"kwhConsumedAc\": 115.234,\n      \"voltage\": 239.8,\n      \"timestamp\": \"{{$isoTimestamp}}\"\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v1/ingest/meter/batch",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "ingest", "meter", "batch"]
+            }
+          }
+        },
+        {
+          "name": "Ingest Vehicle Batch",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"readings\": [\n    {\n      \"vehicleId\": \"VEHICLE_001\",\n      \"soc\": 85.5,\n      \"kwhDeliveredDc\": 42.123,\n      \"batteryTemp\": 35.2,\n      \"timestamp\": \"{{$isoTimestamp}}\"\n    },\n    {\n      \"vehicleId\": \"VEHICLE_002\",\n      \"soc\": 72.3,\n      \"kwhDeliveredDc\": 38.456,\n      \"batteryTemp\": 33.8,\n      \"timestamp\": \"{{$isoTimestamp}}\"\n    },\n    {\n      \"vehicleId\": \"VEHICLE_003\",\n      \"soc\": 95.1,\n      \"kwhDeliveredDc\": 48.789,\n      \"batteryTemp\": 37.5,\n      \"timestamp\": \"{{$isoTimestamp}}\"\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v1/ingest/vehicle/batch",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "ingest", "vehicle", "batch"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Analytics",
+      "item": [
+        {
+          "name": "Get Vehicle 24h Performance",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v1/analytics/performance/VEHICLE_001",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "analytics", "performance", "VEHICLE_001"]
+            }
+          }
+        },
+        {
+          "name": "Get Vehicle Performance with Meter",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v1/analytics/performance/VEHICLE_001?meterId=METER_001",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "analytics", "performance", "VEHICLE_001"],
+              "query": [
+                {
+                  "key": "meterId",
+                  "value": "METER_001"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Explain Query Plan",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v1/analytics/performance/VEHICLE_001/explain",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "analytics", "performance", "VEHICLE_001", "explain"]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    }
+  ]
+}
