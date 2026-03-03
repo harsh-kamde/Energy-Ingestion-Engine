@@ -5,7 +5,7 @@
 
 A high-scale telemetry ingestion system built with NestJS and PostgreSQL, designed to handle 10,000+ Smart Meters and EV Fleets sending data every 60 seconds.
 
-## 🎯 Project Overview
+## 🎯 Project Overview 
 
 This system processes two independent data streams from IoT devices:
 - **Smart Meters** (Grid Side): AC power consumption measurements
