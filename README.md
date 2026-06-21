@@ -1,4 +1,4 @@
-<img width="1911" height="1024" alt="image" src="https://github.com/user-attachments/assets/de92851f-53fc-4e16-82c2-5b2797df8505" />
+<img width="1911" height="1024" alt="image" src="https://github.com/user-attachments/assets/de92851f-53fc-4e16-82c2-5b2797df8505" /> 
 
 
 # Energy Ingestion Engine
